@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TypeTarget : MonoBehaviour {
 
-    public const int MAX_TEXT_LENGTH = 20;
+    public const int MAX_TEXT_LENGTH = 19;
 
     public string command = "none";
 

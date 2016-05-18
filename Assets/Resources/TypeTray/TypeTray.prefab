@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f72b444c3d7844bb92b3b3def9249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTrayTextLength: 28
+  maxTrayTextLength: 27
 --- !u!114 &11427882
 MonoBehaviour:
   m_ObjectHideFlags: 1

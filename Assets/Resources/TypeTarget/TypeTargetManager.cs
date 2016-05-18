@@ -57,6 +57,10 @@ public class TypeTargetManager : MonoBehaviour {
         var rawWords = text.text.Split('\n');
         foreach (var word in rawWords)
         {
+            if (word.Length > TypeTarget.MAX_TEXT_LENGTH)
+            {
+                continue;
+            }
             bool isValid = true;
             foreach (var c in word.ToCharArray())
             {
