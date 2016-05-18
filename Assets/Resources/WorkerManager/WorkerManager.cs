@@ -14,7 +14,7 @@ public class WorkerManager : MonoBehaviour {
         for (int i = 0; i < numWorkers; i++)
         {
             WorkerController worker = Instantiate(workerPrefab);
-            worker.transform.position = new Vector3(i * (20.0f / (numWorkers)), 0.0f, 0.0f);
+            worker.transform.position = new Vector3(i * (20.0f / (numWorkers)) + 3, 0.0f, 6f);
             worker.ReachedDestination += Worker_ReachedDestination;
             workers.Add(worker);
         }
@@ -34,7 +34,7 @@ public class WorkerManager : MonoBehaviour {
 
     public void WorkStation(string station)
     {
-        workers[0].MoveToStation(station);
+        workers[0].AssignTask(station);
     }
 
     private void Worker_ReachedDestination(WorkerController worker, Waypoint dest, string dest_id)
