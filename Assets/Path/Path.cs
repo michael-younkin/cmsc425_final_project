@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Path : MonoBehaviour {
     
-    public Waypoint getStart() {
+    public Waypoint GetStart() {
         return transform.SafeFindChild("Waypoint0").SafeGetComponent<Waypoint>();
     }
 

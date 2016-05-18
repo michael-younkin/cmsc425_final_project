@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 
-public class CustomerController : MonoBehaviour {
-
-    // TODO List of desired ingredients
+public class WorkerController : MonoBehaviour {
 
     private Animator animator;
     private NavMeshAgent agent;
-
-    private GameObject path;
+    
     private Waypoint currentDest;
+    private Station currentStation;
 
     public delegate void ReachedDestinationEvent(Waypoint dest);
     public event ReachedDestinationEvent ReachedDestination;
@@ -21,10 +19,13 @@ public class CustomerController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = false;
         currentDest = null;
+        currentStation = null;
+
+        MoveToStation("Beans");
     }
 
     /**
-        Move the customer to the named Bin
+        Move the worker to the named Station
     */
     void MoveToStation(string name)
     {
@@ -33,14 +34,6 @@ public class CustomerController : MonoBehaviour {
         agent.SetDestination(currentDest.position);
     }
 
-    /**
-        Move the customer to the exit waypoint
-    */
-    void MoveToExit()
-    {
-        
-    }
-    
     // Update is called once per frame
     void Update()
     {
@@ -56,8 +49,6 @@ public class CustomerController : MonoBehaviour {
             float targetDistance = (transform.position - currentDest.position).magnitude;
             if (targetDistance < 0.5f)
             {
-                Debug.Log("Reached dest");
-
                 if (ReachedDestination != null)
                     ReachedDestination(currentDest);
                 currentDest = null;

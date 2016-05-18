@@ -5,7 +5,7 @@ public class Waypoint : MonoBehaviour {
 
     public Transform nextWaypoint;
 
-    public Waypoint getNext()
+    public Waypoint GetNext()
     {
         return nextWaypoint.SafeGetComponent<Waypoint>();
     }
