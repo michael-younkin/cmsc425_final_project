@@ -55,8 +55,9 @@ public class TypeTargetManager : MonoBehaviour {
     {
         var text = GameUtil.SafeLoad<TextAsset>("TypeTarget/WordData/words");
         var rawWords = text.text.Split('\n');
-        foreach (var word in rawWords)
+        foreach (var rawWord in rawWords)
         {
+            var word = rawWord.Replace("\r", "");
             if (word.Length > TypeTarget.MAX_TEXT_LENGTH)
             {
                 continue;

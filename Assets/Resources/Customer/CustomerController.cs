@@ -12,7 +12,7 @@ public class CustomerController : MonoBehaviour {
     private Waypoint currentDest;
     private bool exiting;
 
-    public delegate void ReachedDestinationEvent(Waypoint dest);
+    public delegate void ReachedDestinationEvent(CustomerController customer, Waypoint dest, string dest_id);
     public event ReachedDestinationEvent ReachedDestination;
 
     // Use this for initialization
@@ -63,7 +63,14 @@ public class CustomerController : MonoBehaviour {
             if (targetDistance < 0.5f)
             {
                 if (ReachedDestination != null)
-                    ReachedDestination(currentDest);
+                {
+                    string dest_id;
+                    if (currentDest.transform.parent != null)
+                        dest_id = currentDest.transform.parent.name;
+                    else
+                        dest_id = currentDest.name;
+                    ReachedDestination(this, currentDest, dest_id);
+                }
                 currentDest = null;
                 if (exiting)
                 {
