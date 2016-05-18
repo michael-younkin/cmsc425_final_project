@@ -14,7 +14,7 @@ public class WorkerManager : MonoBehaviour {
         for (int i = 0; i < numWorkers; i++)
         {
             WorkerController worker = Instantiate(workerPrefab);
-            worker.transform.position = new Vector3(i * (20.0f / (numWorkers - 1)), 0.0f, 0.0f);
+            worker.transform.position = new Vector3(i * (20.0f / (numWorkers)), 0.0f, 0.0f);
             worker.ReachedDestination += Worker_ReachedDestination;
             workers.Add(worker);
         }
