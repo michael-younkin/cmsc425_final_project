@@ -13,6 +13,16 @@ public static class GameUtil {
         return r;
     }
 
+    public static T SafeLoad<T>(string path) where T: UnityEngine.Object
+    {
+        var r = Resources.Load<T>(path);
+        if (r == null)
+        {
+            Debug.LogError(string.Format("Unable to load resource with name \"{0}\".", path));
+        }
+        return (T)r;
+    }
+
     public static GameManager GameManager
     {
         get

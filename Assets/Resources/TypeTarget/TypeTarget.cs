@@ -25,7 +25,7 @@ public class TypeTarget : MonoBehaviour {
 
     Text text;
 
-	void Start () {
+	void Awake () {
         text = this.SafeFindChild("Text").SafeGetComponent<Text>();
 	}
 }
