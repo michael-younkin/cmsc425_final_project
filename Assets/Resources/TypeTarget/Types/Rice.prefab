@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b83e928f641ba49bbd0db5ac3def9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  command: Rice
 --- !u!114 &11474538
 MonoBehaviour:
   m_ObjectHideFlags: 1

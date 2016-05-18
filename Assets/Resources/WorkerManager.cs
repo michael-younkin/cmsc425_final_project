@@ -18,11 +18,23 @@ public class WorkerManager : MonoBehaviour {
             worker.ReachedDestination += Worker_ReachedDestination;
             workers.Add(worker);
         }
+
+        GameUtil.SafeFind("TypeTargetManager").SafeGetComponent<TypeTargetManager>().TargetMatch += WorkerManager_TargetMatch;
 	}
+
+    private void WorkerManager_TargetMatch(string command)
+    {
+        WorkStation(command);
+    }
 
     public bool GetIngredient(string ingredient)
     {
         return false;
+    }
+
+    public void WorkStation(string station)
+    {
+        workers[0].MoveToStation(station);
     }
 
     private void Worker_ReachedDestination(WorkerController worker, Waypoint dest, string dest_id)

@@ -12,15 +12,6 @@ public class WorkerController : MonoBehaviour {
     public delegate void ReachedDestinationEvent(WorkerController worker, Waypoint dest, string destID);
     public event ReachedDestinationEvent ReachedDestination;
 
-    private bool busy;
-    public bool isBusy
-    {
-        get
-        {
-            return busy;
-        }
-    }
-
     // Use this for initialization
     void Start()
     {
@@ -36,12 +27,12 @@ public class WorkerController : MonoBehaviour {
     */
     public void MoveToStation(string name)
     {
+        Debug.Log("Moving to " + name);
         GameObject station = GameUtil.SafeFind("Stations").SafeFindChild(name);
         currentDest = station.SafeGetComponent<Station>().GetCustomerWaypoint();
         agent.SetDestination(currentDest.position);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 velocity = (agent.nextPosition - transform.position) / Time.deltaTime;
