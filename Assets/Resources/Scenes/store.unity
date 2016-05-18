@@ -610,7 +610,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 177286, guid: 0a55fb3627b2bb24bba5123a4fe0d126, type: 2}
       propertyPath: m_Name
-      value: Cashier
+      value: Money
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a55fb3627b2bb24bba5123a4fe0d126, type: 2}
@@ -742,7 +742,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11432904, guid: b67762047d104234c9c1e17c279f40ec, type: 2}
       propertyPath: numWorkers
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b67762047d104234c9c1e17c279f40ec, type: 2}
@@ -788,7 +788,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 177286, guid: 0a55fb3627b2bb24bba5123a4fe0d126, type: 2}
       propertyPath: m_Name
-      value: Tomato
+      value: Salsa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a55fb3627b2bb24bba5123a4fe0d126, type: 2}
