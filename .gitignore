@@ -32,3 +32,8 @@ sysinfo.txt
 ehthumbs.db
 [Tt]humbs.db
 [Dd]esktop.ini
+
+# Unity Binary generation
+*.exe
+*.pdb
+ChipotleKeyboard_Data
