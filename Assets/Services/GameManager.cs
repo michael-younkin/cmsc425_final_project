@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-	void Start () {
+    void Awake()
+    {
         gameplayInputEmitter = new InputEmitterWrapper(this.SafeGetComponent<InputEmitter>());
-	}
+    }
 	
 	void Update () {
 	
