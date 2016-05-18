@@ -703,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa60147d4cd4b0409a476a0960f972e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  burritoPrefab: {fileID: 11444776, guid: 0e84dcf3ec441d040b2605bf9f068c02, type: 2}
 --- !u!137 &13783244
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
