@@ -16,4 +16,14 @@ public static class ExtensionMethods {
         }
         return r;
     }
+
+    public static Transform SafeFindChild(this Transform obj, string name)
+    {
+        Transform child = obj.Find(name);
+        if (child == null)
+        {
+            Debug.LogError(string.Format("Unable to find GameObject child of \"{0}\" with name \"{0}\".", obj.name, name));
+        }
+        return child;
+    }
 }
