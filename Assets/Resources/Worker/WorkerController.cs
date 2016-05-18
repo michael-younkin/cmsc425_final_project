@@ -27,7 +27,6 @@ public class WorkerController : MonoBehaviour {
     */
     public void MoveToStation(string name)
     {
-        Debug.Log("Moving to " + name);
         GameObject station = GameUtil.SafeFind("Stations").SafeFindChild(name);
         currentDest = station.SafeGetComponent<Station>().GetCustomerWaypoint();
         agent.SetDestination(currentDest.position);
