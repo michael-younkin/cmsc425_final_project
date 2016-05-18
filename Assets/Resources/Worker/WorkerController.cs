@@ -26,6 +26,13 @@ public class WorkerController : MonoBehaviour {
         currentDest = null;
         currentStation = null;
         createBurrito();
+
+        ReachedDestination += WorkerController_ReachedDestination;
+    }
+
+    private void WorkerController_ReachedDestination(WorkerController worker, Waypoint dest, string destID)
+    {
+        TransferIngredient();
     }
 
     Station FindStation(string name)
@@ -62,6 +69,7 @@ public class WorkerController : MonoBehaviour {
 
     public void TransferIngredient()
     {
+        Debug.Log("Transferring");
         if (currentStation != null)
         {
             if (currentStation.name.Equals("Money"))
@@ -79,8 +87,8 @@ public class WorkerController : MonoBehaviour {
         // Create a burrito along with the customer
         BurritoController burrito = Instantiate<BurritoController>(burritoPrefab);
         Waypoint burritoStart = GameUtil.SafeFind("BurritoEnterWaypoint").SafeGetComponent<Waypoint>();
-        float burritoX = GameUtil.SafeFind("Worker").transform.position.x;
-        burrito.transform.position.Set(burritoX, burritoStart.position.y, burritoStart.position.z);
+        burrito.transform.position = burritoStart.position;
+        burrito.name = "Burrito";
     }
 
     void Update()
@@ -128,9 +136,8 @@ public class WorkerController : MonoBehaviour {
         GameObject burrito = GameObject.Find("Burrito");
         if (burrito != null)
         {
-            burrito.transform.position.Set(transform.position.x, burrito.transform.position.y,
+            burrito.transform.position = new Vector3(transform.position.x, burrito.transform.position.y,
                 burrito.transform.position.z);
-            transform.position = agent.nextPosition;
         }
     }
 }
