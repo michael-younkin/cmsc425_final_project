@@ -26,4 +26,9 @@ public static class ExtensionMethods {
         }
         return child;
     }
+
+    public static GameObject SafeFindChild(this GameObject obj, string name)
+    {
+        return obj.transform.SafeFindChild(name).gameObject;
+    }
 }
