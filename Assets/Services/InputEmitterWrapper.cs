@@ -5,11 +5,8 @@ public class InputEmitterWrapper {
     public delegate void KeyEvent(KeyCode key);
     public event KeyEvent KeyUp;
 
-    InputEmitter root;
-
     public InputEmitterWrapper(InputEmitter root)
     {
-        this.root = root;
         root.KeyUp += Root_KeyUp;
     }
 
