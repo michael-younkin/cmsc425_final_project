@@ -21,6 +21,7 @@ public class GameTaskManager : MonoBehaviour {
     public Image currentTaskIcon;
     public Text remainingTasksText;
     public Text remainingSecondsText;
+    public Text currentLevelText;
 
     private string currentTask;
     private List<string> remainingTasks;
@@ -39,6 +40,7 @@ public class GameTaskManager : MonoBehaviour {
         timeStart = Time.realtimeSinceStartup;
         remainingTasks = GenerateTaskList(numTasks);
         MoveToNextTask();
+        currentLevelText.text = "" + level;
     }
 
     void MoveToNextTask()
@@ -79,7 +81,7 @@ public class GameTaskManager : MonoBehaviour {
         int secondsRemaining = 30 - (int)(Time.realtimeSinceStartup - timeStart);
         if (secondsRemaining <= 0)
         {
-            // Lose here
+            Application.LoadLevel("end");
         } else
         {
             remainingSecondsText.text = "" + secondsRemaining;

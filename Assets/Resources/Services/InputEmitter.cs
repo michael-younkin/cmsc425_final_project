@@ -18,5 +18,10 @@ public class InputEmitter : MonoBehaviour {
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
