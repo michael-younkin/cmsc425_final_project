@@ -10,6 +10,7 @@ public class CustomerController : MonoBehaviour {
 
     private GameObject path;
     private Waypoint currentDest;
+    private bool exiting;
 
     public delegate void ReachedDestinationEvent(Waypoint dest);
     public event ReachedDestinationEvent ReachedDestination;
@@ -21,24 +22,29 @@ public class CustomerController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         agent.updatePosition = false;
         currentDest = null;
+        exiting = false;
     }
 
     /**
         Move the customer to the named Bin
     */
-    void MoveToStation(string name)
+    public void MoveToStation(string name)
     {
         GameObject station = GameUtil.SafeFind("Stations").SafeFindChild(name);
         currentDest = station.SafeGetComponent<Station>().GetCustomerWaypoint();
         agent.SetDestination(currentDest.position);
+        exiting = false;
     }
 
     /**
         Move the customer to the exit waypoint
     */
-    void MoveToExit()
+    public void MoveToExit()
     {
-        
+        GameObject waypoint = GameUtil.SafeFind("ExitWaypoint");
+        currentDest = waypoint.SafeGetComponent<Waypoint>();
+        agent.SetDestination(currentDest.position);
+        exiting = true;
     }
     
     // Update is called once per frame
@@ -56,11 +62,13 @@ public class CustomerController : MonoBehaviour {
             float targetDistance = (transform.position - currentDest.position).magnitude;
             if (targetDistance < 0.5f)
             {
-                Debug.Log("Reached dest");
-
                 if (ReachedDestination != null)
                     ReachedDestination(currentDest);
                 currentDest = null;
+                if (exiting)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

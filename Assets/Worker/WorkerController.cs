@@ -9,8 +9,17 @@ public class WorkerController : MonoBehaviour {
     private Waypoint currentDest;
     private Station currentStation;
 
-    public delegate void ReachedDestinationEvent(Waypoint dest);
+    public delegate void ReachedDestinationEvent(WorkerController worker, Waypoint dest, string destID);
     public event ReachedDestinationEvent ReachedDestination;
+
+    private bool busy;
+    public bool isBusy
+    {
+        get
+        {
+            return busy;
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -20,14 +29,12 @@ public class WorkerController : MonoBehaviour {
         agent.updatePosition = false;
         currentDest = null;
         currentStation = null;
-
-        MoveToStation("Beans");
     }
 
     /**
         Move the worker to the named Station
     */
-    void MoveToStation(string name)
+    public void MoveToStation(string name)
     {
         GameObject station = GameUtil.SafeFind("Stations").SafeFindChild(name);
         currentDest = station.SafeGetComponent<Station>().GetCustomerWaypoint();
@@ -50,7 +57,7 @@ public class WorkerController : MonoBehaviour {
             if (targetDistance < 0.5f)
             {
                 if (ReachedDestination != null)
-                    ReachedDestination(currentDest);
+                    ReachedDestination(this, currentDest, currentDest.transform.parent.name);
                 currentDest = null;
             }
         }
