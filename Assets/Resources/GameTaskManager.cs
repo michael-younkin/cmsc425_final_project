@@ -35,7 +35,7 @@ public class GameTaskManager : MonoBehaviour {
 
     void SetupGame()
     {
-        int numTasks = level * 2 + 10;
+        int numTasks = level * 2 + 5;
         timeStart = Time.realtimeSinceStartup;
         remainingTasks = GenerateTaskList(numTasks);
         MoveToNextTask();

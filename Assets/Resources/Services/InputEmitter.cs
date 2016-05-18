@@ -10,7 +10,7 @@ public class InputEmitter : MonoBehaviour {
     {
         foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
         {
-            if (Input.GetKeyUp(code))
+            if (Input.GetKeyDown(code))
             {
                 if (KeyUp != null)
                 {
