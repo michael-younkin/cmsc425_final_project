@@ -523,6 +523,52 @@ Transform:
   - {fileID: 648031328}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!1001 &634356702
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 445568, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 182246, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+      propertyPath: m_Name
+      value: BurritoEnterWaypoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 29bc2a5e9f5d58e4c8e8012c7a368fa1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &648031327
 Prefab:
   m_ObjectHideFlags: 0
@@ -692,7 +738,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 432724, guid: b67762047d104234c9c1e17c279f40ec, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11432904, guid: b67762047d104234c9c1e17c279f40ec, type: 2}
       propertyPath: numWorkers
@@ -1476,6 +1522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customerPrefab: {fileID: 0}
+  burritoPrefab: {fileID: 0}
 --- !u!4 &1386421460
 Transform:
   m_ObjectHideFlags: 0

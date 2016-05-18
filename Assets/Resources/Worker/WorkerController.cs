@@ -3,6 +3,8 @@ using System.Collections;
 
 public class WorkerController : MonoBehaviour {
 
+    public BurritoController burritoPrefab;
+
     private Animator animator;
     private NavMeshAgent agent;
     
@@ -20,6 +22,7 @@ public class WorkerController : MonoBehaviour {
         agent.updatePosition = false;
         currentDest = null;
         currentStation = null;
+        createBurrito();
     }
 
     /**
@@ -30,6 +33,29 @@ public class WorkerController : MonoBehaviour {
         GameObject station = GameUtil.SafeFind("Stations").SafeFindChild(name);
         currentDest = station.SafeGetComponent<Station>().GetCustomerWaypoint();
         agent.SetDestination(currentDest.position);
+    }
+
+    public void TransferIngredient()
+    {
+        if (currentStation != null)
+        {
+            if (currentStation.name.Equals("Money"))
+            {
+                GameObject currentBurrito = GameUtil.SafeFind("Burrito");
+                Destroy(currentBurrito);
+                createBurrito();
+            }
+        }
+        
+    }
+
+    public void createBurrito()
+    {
+        // Create a burrito along with the customer
+        BurritoController burrito = Instantiate<BurritoController>(burritoPrefab);
+        Waypoint burritoStart = GameUtil.SafeFind("BurritoEnterWaypoint").SafeGetComponent<Waypoint>();
+        float burritoX = GameUtil.SafeFind("Worker").transform.position.x;
+        burrito.transform.position.Set(burritoX, burritoStart.position.y, burritoStart.position.z);
     }
 
     void Update()
@@ -47,11 +73,26 @@ public class WorkerController : MonoBehaviour {
             if (targetDistance < 0.5f)
             {
                 if (ReachedDestination != null)
+                {
+                    if (currentDest.transform.parent != null
+                            && currentDest.transform.parent.GetComponent<Station>() != null)
+                    {
+                        currentStation = currentDest.transform.parent.SafeGetComponent<Station>();
+                    }
                     ReachedDestination(this, currentDest, currentDest.transform.parent.name);
+                }
                 currentDest = null;
             }
         }
 
         transform.position = agent.nextPosition;
+
+        // Move burrito with worker
+        GameObject burrito = GameObject.Find("Burrito");
+        if (burrito != null)
+        {
+            burrito.transform.position.Set(transform.position.x, burrito.transform.position.y,
+                burrito.transform.position.z);
+        }
     }
 }
