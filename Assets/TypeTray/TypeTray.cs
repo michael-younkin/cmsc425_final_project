@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class TypeTray : MonoBehaviour {
 
+    public delegate void CommandSubmitEvent(string command);
+    public event CommandSubmitEvent CommandSubmit;
+
     public int maxTrayTextLength = 10;
 
     static HashSet<KeyCode> letters = new HashSet<KeyCode>(new KeyCode[] {
@@ -33,12 +36,37 @@ public class TypeTray : MonoBehaviour {
         KeyCode.W,
         KeyCode.X,
         KeyCode.Y,
-        KeyCode.Z
+        KeyCode.Z,
     });
+
+    static Dictionary<KeyCode, string> numbers = new Dictionary<KeyCode, string>();
 
     InputEmitterWrapper gameplayInputEmitter;
 
     Text trayText;
+
+    static TypeTray()
+    {
+        // Setup the numbers dictionary
+        KeyCode[] numberKeyCodes = new KeyCode[]
+        {
+            KeyCode.Alpha0,
+            KeyCode.Alpha1,
+            KeyCode.Alpha2,
+            KeyCode.Alpha3,
+            KeyCode.Alpha4,
+            KeyCode.Alpha5,
+            KeyCode.Alpha6,
+            KeyCode.Alpha7,
+            KeyCode.Alpha8,
+            KeyCode.Alpha9,
+        };
+        foreach (var key in numberKeyCodes)
+        {
+            string name = key.ToString();
+            numbers[key] = name.Substring(5);
+        }
+    }
 
 	void Start () {
         var gameManager = GameUtil.GameManager;
@@ -51,14 +79,36 @@ public class TypeTray : MonoBehaviour {
     private void GameplayInputEmitter_KeyUp(KeyCode key)
     {
         int textLength = trayText.text.Length;
-        // If they typed a letter and there aren't too many characters already, add it to the tray text
-        if (letters.Contains(key) && textLength + 1 < maxTrayTextLength)
+        // If they typed a letter or number and there aren't too many characters already, add it to the tray text
+        if (textLength + 1 < maxTrayTextLength)
         {
-            trayText.text += key.ToString().ToLower();
+            string addition = "";
+            if (letters.Contains(key))
+            {
+                addition = key.ToString().ToLower();
+            } else if (numbers.ContainsKey(key))
+            {
+                addition = numbers[key];
+            } else if (key == KeyCode.Space)
+            {
+                addition = " ";
+            }
+            trayText.text += addition;
         // If they typed backspace, remove a character if there are any
-        } else if (key == KeyCode.Backspace && textLength > 0)
+        }
+        if (key == KeyCode.Backspace && textLength > 0)
         {
-            trayText.text = trayText.text.Substring(0, trayText.text.Length - 1);
+            trayText.text = trayText.text.Substring(0, textLength - 1);
+        }
+        // If they typed enter, try to submit the command
+        if (key == KeyCode.Return && textLength > 0)
+        {
+            string text = trayText.text;
+            trayText.text = "";
+            if (CommandSubmit != null)
+            {
+                CommandSubmit(text);
+            }
         }
     }
 }
