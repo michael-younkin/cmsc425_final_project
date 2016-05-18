@@ -31,4 +31,9 @@ public static class ExtensionMethods {
     {
         return obj.transform.SafeFindChild(name).gameObject;
     }
+
+    public static GameObject SafeFindChild(this Component obj, string name)
+    {
+        return obj.gameObject.SafeFindChild(name);
+    }
 }
