@@ -69,7 +69,6 @@ public class WorkerController : MonoBehaviour {
 
     public void TransferIngredient()
     {
-        Debug.Log("Transferring");
         if (currentStation != null)
         {
             if (currentStation.name.Equals("Money"))
@@ -78,8 +77,15 @@ public class WorkerController : MonoBehaviour {
                 Destroy(currentBurrito);
                 createBurrito();
             }
+            animator.SetBool("ladling", true);
+            StartCoroutine("StopLadling");
         }
-        
+    }
+
+    private IEnumerator StopLadling()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("ladling", false);
     }
 
     public void createBurrito()
