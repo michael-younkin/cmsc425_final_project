@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class TypeTargetManager : MonoBehaviour {
 
+    public delegate void TargetEvent(string command);
+    public event TargetEvent TargetMatch;
+
     HashSet<char> validChars = new HashSet<char>(new char[]
     {
         'a',
@@ -87,6 +90,26 @@ public class TypeTargetManager : MonoBehaviour {
         foreach (var target in targets)
         {
             AssignText(target);
+        }
+
+        // Do something upon command submission
+        GameUtil.SafeFind("TypeTray").GetComponent<TypeTray>().CommandSubmit += TypeTargetManager_CommandSubmit;
+    }
+
+    private void TypeTargetManager_CommandSubmit(string command)
+    {
+        // See if the command is valid, and take action if it was
+        foreach (var target in targets)
+        {
+            if (target.Text == command)
+            {
+                if (TargetMatch != null)
+                {
+                    TargetMatch(target.command);
+                }
+                AssignText(target);
+                break;
+            }
         }
     }
 

@@ -6,6 +6,8 @@ public class TypeTarget : MonoBehaviour {
 
     public const int MAX_TEXT_LENGTH = 20;
 
+    public string command = "none";
+
     public string Text
     {
         get
