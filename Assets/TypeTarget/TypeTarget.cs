@@ -1,15 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TypeTarget : MonoBehaviour {
 
-	// Use this for initialization
+    public const int MAX_TEXT_LENGTH = 20;
+
+    public string Text
+    {
+        get
+        {
+            return text.text;
+        }
+
+        set
+        {
+            if (value.Length > MAX_TEXT_LENGTH)
+            {
+                Debug.LogError(string.Format("Input text for type target is too long: \"{0}\"", value));
+            }
+            text.text = value;
+        }
+    }
+
+    Text text;
+
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        text = this.SafeFindChild("Text").SafeGetComponent<Text>();
 	}
 }
