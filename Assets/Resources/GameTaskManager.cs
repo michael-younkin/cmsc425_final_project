@@ -20,14 +20,24 @@ public class GameTaskManager : MonoBehaviour {
 
     public Image currentTaskIcon;
     public Text remainingTasksText;
+    public Text remainingSecondsText;
 
     private string currentTask;
     private List<string> remainingTasks;
+    private float timeStart;
+    private int level = 0;
 
     void Start()
     {
         GameUtil.SafeFind("TypeTargetManager").SafeGetComponent<TypeTargetManager>().TargetMatch += GameTaskManager_TargetMatch;
-        remainingTasks = GenerateTaskList(10);
+        SetupGame();
+    }
+
+    void SetupGame()
+    {
+        int numTasks = level * 2 + 10;
+        timeStart = Time.realtimeSinceStartup;
+        remainingTasks = GenerateTaskList(numTasks);
         MoveToNextTask();
     }
 
@@ -37,9 +47,12 @@ public class GameTaskManager : MonoBehaviour {
         {
             currentTask = remainingTasks[0];
             remainingTasks.RemoveAt(0);
+            currentTaskIcon.sprite = GameUtil.SafeLoad<Sprite>("TypeTarget/Icons/" + currentTask);
+            remainingTasksText.text = "" + remainingTasks.Count;
+        } else {
+            level++;
+            SetupGame();
         }
-        currentTaskIcon.sprite = GameUtil.SafeLoad<Sprite>("TypeTarget/Icons/" + currentTask);
-        remainingTasksText.text = "" + remainingTasks.Count;
     }
 
     List<string> GenerateTaskList(int length)
@@ -57,6 +70,19 @@ public class GameTaskManager : MonoBehaviour {
         if (command == currentTask)
         {
             MoveToNextTask();
+        }
+    }
+
+    void Update()
+    {
+        // Update seconds remaining
+        int secondsRemaining = 30 - (int)(Time.realtimeSinceStartup - timeStart);
+        if (secondsRemaining <= 0)
+        {
+            // Lose here
+        } else
+        {
+            remainingSecondsText.text = "" + secondsRemaining;
         }
     }
 }
